@@ -23,6 +23,7 @@ html {
 
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--bg);
   color: var(--ink);
   font-family: "Manrope", sans-serif;
@@ -114,6 +115,11 @@ a {
 
 .header-link {
   justify-self: end;
+}
+
+.menu-toggle,
+.mobile-nav-github {
+  display: none;
 }
 
 .hero {
@@ -744,10 +750,99 @@ footer {
 @media (max-width: 900px) {
   .site-header {
     grid-template-columns: 1fr auto;
+    height: 68px;
+  }
+
+  .header-link {
+    display: none;
+  }
+
+  .menu-toggle {
+    position: relative;
+    z-index: 22;
+    display: inline-flex;
+    min-width: 82px;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    background: rgba(8, 13, 20, 0.78);
+    color: var(--ink);
+    font: 0.68rem "DM Mono", monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .menu-toggle-icon {
+    display: grid;
+    gap: 5px;
+  }
+
+  .menu-toggle-icon i {
+    display: block;
+    width: 15px;
+    height: 1px;
+    background: var(--teal);
+    transition: transform 180ms ease;
+  }
+
+  .menu-toggle[aria-expanded="true"] .menu-toggle-icon i:first-child {
+    transform: translateY(3px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded="true"] .menu-toggle-icon i:last-child {
+    transform: translateY(-3px) rotate(-45deg);
   }
 
   .site-header nav {
-    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 21;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    padding: 100px max(24px, 8vw) 60px;
+    background: rgba(8, 13, 20, 0.98);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .site-header nav.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .site-header nav a {
+    width: 100%;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(2rem, 10vw, 4rem);
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    text-transform: none;
+  }
+
+  .site-header nav .mobile-nav-github {
+    display: block;
+    margin-top: 16px;
+    border-bottom: 0;
+    color: var(--teal);
+    font: 0.8rem "DM Mono", monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  body.menu-open {
+    overflow: hidden;
   }
 
   .hero {
@@ -795,40 +890,124 @@ footer {
 }
 
 @media (max-width: 640px) {
-  .brand > span:last-child {
-    display: none;
+  .site-header {
+    padding-inline: 18px;
   }
 
-  .header-link {
+  .brand > span:last-child {
+    display: inline;
+  }
+
+  .brand {
     font-size: 0.68rem;
   }
 
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+  }
+
+  .hero {
+    padding: 124px 18px 56px;
+  }
+
+  .eyebrow {
+    max-width: 280px;
+    font-size: 0.64rem;
+    line-height: 1.5;
+  }
+
+  .eyebrow::before {
+    width: 22px;
+    flex: 0 0 22px;
+  }
+
   .hero h1 {
-    font-size: clamp(3rem, 15vw, 4.6rem);
+    margin: 26px 0 22px;
+    font-size: clamp(2.75rem, 14vw, 4.25rem);
+    line-height: 1;
+  }
+
+  .hero-copy {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+  }
+
+  .hero-actions .button {
+    width: 100%;
   }
 
   .hero-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    margin-top: 48px;
   }
 
   .hero-stats div {
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
+    padding: 14px 10px;
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
   }
 
   .hero-stats div:last-child {
-    border-bottom: 0;
+    border-right: 0;
+  }
+
+  .hero-stats strong {
+    font-size: 1rem;
+  }
+
+  .hero-stats span {
+    font-size: 0.6rem;
+    line-height: 1.35;
   }
 
   .section,
   .contact {
+    padding-inline: 18px;
     padding-top: 90px;
     padding-bottom: 90px;
   }
 
+  .section-heading {
+    margin-bottom: 40px;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(2.25rem, 11vw, 3.25rem);
+  }
+
+  .project-visual {
+    min-height: 300px;
+  }
+
+  .argument {
+    width: 72px;
+    font-size: 0.62rem;
+  }
+
+  .argument-a {
+    left: 4%;
+  }
+
+  .argument-b {
+    right: 4%;
+  }
+
+  .synthesis {
+    width: 118px;
+    height: 118px;
+    font-size: 0.8rem;
+  }
+
   .project-content,
   .project-card {
-    padding: 30px;
+    padding: 26px 22px;
   }
 
   .project-grid {
@@ -840,11 +1019,14 @@ footer {
   }
 
   .project-card {
-    min-height: 440px;
+    min-height: 0;
+    padding-bottom: 28px;
   }
 
   .card-link {
-    left: 30px;
+    position: static;
+    display: inline-block;
+    margin-top: 30px;
   }
 
   .metric-row {
@@ -857,7 +1039,29 @@ footer {
     gap: 5px;
   }
 
+  .project-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .metric-row.compact {
+    margin-bottom: 0;
+  }
+
+  .contact h2 {
+    font-size: clamp(3rem, 14vw, 4.5rem);
+  }
+
+  .contact-actions {
+    align-items: flex-start;
+  }
+
+  .contact-actions .button {
+    width: 100%;
+  }
+
   footer {
+    padding-inline: 18px;
     flex-direction: column;
   }
 }
