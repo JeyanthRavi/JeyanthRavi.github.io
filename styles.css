@@ -502,6 +502,20 @@ a {
   transition: text-decoration-color 160ms ease;
 }
 
+.project-links span {
+  color: var(--muted);
+}
+
+.visual-phage {
+  background:
+    radial-gradient(circle at 48% 45%, rgba(49, 194, 181, 0.23), transparent 30%),
+    linear-gradient(145deg, #0a1920, #090e15);
+}
+
+.visual-phage .synthesis {
+  box-shadow: 0 0 42px rgba(49, 194, 181, 0.12);
+}
+
 .project-links a:hover,
 .project-links a:focus-visible,
 .card-link:hover,
